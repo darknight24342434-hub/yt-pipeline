@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Test / tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Secrets & local config
+.env
+.env.*
+!.env.example
+*.local.json
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local backups (never commit these)
+*.bak
+*.bak_*
+*.orig
+
+# Project runtime output (originals from this project's .gitignore)
+data/
+downloads/
+logs/
+
+# Auto-downloaded binaries (run-public-tunnel.ps1 fetches cloudflared here)
+tools/
+
+# Media artifacts
+*.mp4
+*.mkv
+*.webm
+*.wav
+*.m4a
+*.vtt
+*.srt

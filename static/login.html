@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Analyzer Login</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="login-shell">
+    <section class="panel login-panel">
+      <h1>YouTube Analyzer</h1>
+      <p>請輸入 access token 後繼續。</p>
+      <form id="login-form" class="form">
+        <label class="field">
+          <span>Access token</span>
+          <input id="token" type="password" autocomplete="current-password" required>
+        </label>
+        <button class="primary" type="submit">登入</button>
+        <div id="message" class="muted"></div>
+      </form>
+    </section>
+  </main>
+  <script>
+    const form = document.querySelector("#login-form");
+    const message = document.querySelector("#message");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      message.textContent = "登入中...";
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({token: document.querySelector("#token").value})
+      });
+      if (response.ok) {
+        window.location.href = "/";
+        return;
+      }
+      const error = await response.json().catch(() => ({}));
+      message.textContent = error.detail || "登入失敗。";
+    });
+  </script>
+</body>
+</html>

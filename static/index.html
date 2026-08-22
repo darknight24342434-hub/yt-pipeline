@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Analyzer</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="workspace">
+      <div class="panel input-panel">
+        <div class="panel-head">
+          <div>
+            <h1>YouTube 影片分析</h1>
+            <p>貼上影片網址，產出完整影片、逐字稿、翻譯、摘要、深度分析與精華片段。</p>
+          </div>
+        </div>
+
+        <form id="job-form" class="form">
+          <label class="field">
+            <span>YouTube 網址</span>
+            <input id="url" name="url" type="url" placeholder="https://www.youtube.com/watch?v=..." required>
+          </label>
+
+          <div class="grid">
+            <label class="field">
+              <span>精華段數</span>
+              <input id="max_clips" name="max_clips" type="number" min="1" max="12" value="5">
+            </label>
+            <label class="field">
+              <span>最短秒數</span>
+              <input id="min_clip_seconds" name="min_clip_seconds" type="number" min="10" max="300" value="30">
+            </label>
+            <label class="field">
+              <span>最長秒數</span>
+              <input id="max_clip_seconds" name="max_clip_seconds" type="number" min="20" max="600" value="120">
+            </label>
+          </div>
+
+          <div class="switches">
+            <label><input id="use_captions" type="checkbox" checked> 優先使用字幕</label>
+            <label><input id="allow_auto_captions" type="checkbox" checked> 允許 YouTube 自動字幕</label>
+            <label><input id="transcribe_if_no_captions" type="checkbox" checked> 無字幕時用本機 Whisper</label>
+          </div>
+
+          <button class="primary" type="submit">開始處理</button>
+        </form>
+      </div>
+
+      <div class="panel status-panel">
+        <div class="panel-head compact">
+          <h2>目前工作</h2>
+          <button id="refresh" class="secondary" type="button">重新整理</button>
+        </div>
+        <div id="current-job" class="empty">尚未建立工作。</div>
+      </div>
+    </section>
+
+    <section class="panel result-panel">
+      <div class="panel-head compact">
+        <h2>結果</h2>
+        <div id="job-id" class="muted"></div>
+      </div>
+      <div id="results" class="empty">完成後會顯示摘要、分析與下載連結。</div>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="panel-head compact">
+        <h2>歷史工作</h2>
+      </div>
+      <div id="history" class="history"></div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
+

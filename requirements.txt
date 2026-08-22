@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+yt-dlp
+requests
+python-dotenv
+langdetect
+openai
+
